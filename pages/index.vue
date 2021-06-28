@@ -5,7 +5,7 @@
     </h1>
     <p class="current-price">現在の白州18年の価格: {{ price }}</p>
     <div v-if="existPrice && priceInt" class="user-container">
-      <p v-if="priceInt">1年あたり: ￥{{ priceInt / 18 }}</p>
+      <p v-if="priceInt">1年あたり: ￥{{ getPalsePrice() }}</p>
       <p class="brand">白州</p>
       <input v-model="year" type="number" class="price" />
       <p class="year">年:</p>
@@ -15,7 +15,7 @@
       <Loading />
     </div>
     <a
-      v-if="loaded"
+      v-if="existPrice && priceInt"
       class="tweet-button"
       :href="`http://twitter.com/share?url=https://hakushu-price.herokuapp.com/&text=白州${getYear()}年
 %0a${calc()}円
@@ -55,8 +55,34 @@ export default Vue.extend({
       })
   },
   methods: {
-    calc(): number {
-      return (this.priceInt / 18) * this.year
+    getPalsePrice() {
+      const palse = this.priceInt / 18
+      return Math.floor(palse)
+    },
+    calc(): string {
+      const resultNum: number = this.getPalsePrice() * this.year
+      const resultStr: string = String(resultNum).toLowerCase()
+      const splitResult = resultStr.split('e')
+
+      if (splitResult.length === 1) {
+        return resultStr
+      }
+      let resultLeft = splitResult[0].replace('.', '')
+      const resultRight = parseInt(splitResult[1])
+      if (resultRight > 0) {
+        const zeroCount = resultRight - resultLeft.length
+        for (let i = 0; i <= zeroCount; i++) {
+          resultLeft += '0'
+        }
+        return resultLeft
+      }
+      const absRight = Math.abs(resultRight)
+      let result = resultLeft
+      for (let i = 0; i < absRight - 1; i++) {
+        result = '0' + result
+      }
+      result = '0.' + result
+      return result
     },
     getYear(): number {
       if (Math.abs(this.year)) {

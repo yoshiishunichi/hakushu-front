@@ -4,9 +4,9 @@ export default {
   },
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    title: '1年あたりの白州の値段',
+    title: '白州の値段を捏造するサイト',
     htmlAttrs: {
-      lang: 'en',
+      lang: 'ja',
     },
     meta: [
       { charset: 'utf-8' },
