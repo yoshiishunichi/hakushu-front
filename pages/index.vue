@@ -1,15 +1,13 @@
 <template>
   <div class="container">
-    <h1>
-      現在amazonで販売されている白州18年の価格から<br />好きな年代の白州の値段を算出します
-    </h1>
+    <h1>現在の白州18年の価格から<br />好きな年代の白州の値段を捏造します</h1>
     <p class="current-price">現在の白州18年の価格: {{ price }}</p>
     <div v-if="existPrice && priceInt" class="user-container">
       <p v-if="priceInt">1年あたり: ￥{{ getPalsePrice() }}</p>
       <p class="brand">白州</p>
       <input v-model="year" type="number" class="price" />
       <p class="year">年:</p>
-      <p>￥{{ calc() }}</p>
+      <p :class="{ strong: isStrong }">￥{{ calc() }}</p>
     </div>
     <div v-if="!loaded" class="loading-container">
       <Loading />
@@ -17,7 +15,7 @@
     <a
       v-if="existPrice && priceInt"
       class="tweet-button"
-      :href="`http://twitter.com/share?url=https://hakusyu-price.herokuapp.com/&text=白州${getYear()}年
+      :href="`http://twitter.com/share?url=https://hakushu-price-generator.herokuapp.com/&text=白州${getYear()}年
 %0a${calc()}円
 %0a`"
       target="_blank"
@@ -38,6 +36,7 @@ export default Vue.extend({
       existPrice: false,
       year: 0,
       loaded: false,
+      isStrong: false,
     }
   },
   mounted() {
@@ -60,11 +59,16 @@ export default Vue.extend({
       return Math.floor(palse)
     },
     calc(): string {
+      if (this.year === 18) {
+        this.isStrong = false
+        return this.price
+      }
       const resultNum: number = this.getPalsePrice() * this.year
       const resultStr: string = String(resultNum).toLowerCase()
       const splitResult = resultStr.split('e')
 
       if (splitResult.length === 1) {
+        this.isStrong = false
         return resultStr
       }
       let resultLeft = splitResult[0].replace('.', '')
@@ -74,6 +78,7 @@ export default Vue.extend({
         for (let i = 0; i <= zeroCount; i++) {
           resultLeft += '0'
         }
+        this.isStrong = true
         return resultLeft
       }
       const absRight = Math.abs(resultRight)
@@ -82,6 +87,7 @@ export default Vue.extend({
         result = '0' + result
       }
       result = '0.' + result
+      this.isStrong = false
       return result
     },
     getYear(): number {
@@ -134,6 +140,7 @@ button {
   font-weight: bold;
   font-size: 15px;
   margin-top: 18px;
+  line-height: 18px;
   width: 75px;
   text-align: center;
 }
@@ -151,6 +158,8 @@ button {
 
 .price {
   outline: none;
+  width: 30%;
+  min-width: 141px;
 }
 
 .user-container {
@@ -171,5 +180,32 @@ button {
   left: 0;
   z-index: 10;
   padding: auto;
+}
+
+.strong {
+  font-size: 36px !important;
+  font-weight: bold;
+}
+
+@media screen and (max-width: 600px) {
+  h1 {
+    font-size: 21px;
+  }
+
+  .current-price,
+  .user-container p {
+    font-size: 18px;
+  }
+}
+
+@media screen and (max-width: 350px) {
+  h1 {
+    font-size: 18px;
+  }
+
+  .current-price,
+  .user-container p {
+    font-size: 15px;
+  }
 }
 </style>
