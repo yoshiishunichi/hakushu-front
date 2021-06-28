@@ -3,7 +3,7 @@
     <div class="bounce1"></div>
     <div class="bounce2"></div>
     <div class="bounce3"></div>
-    <p>Loading...</p>
+    <p>Loading</p>
   </div>
 </template>
 
@@ -25,8 +25,10 @@
 }
 
 p {
-  font-size: 21px;
+  font-size: 18px;
   color: #333;
+  margin: 0 auto;
+  text-align: center;
 }
 
 .spinner .bounce1 {

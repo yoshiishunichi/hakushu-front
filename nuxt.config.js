@@ -4,7 +4,7 @@ export default {
   },
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    title: '白州の値段を捏造するサイト',
+    title: '白州の値段',
     htmlAttrs: {
       lang: 'ja',
     },

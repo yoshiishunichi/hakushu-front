@@ -111,6 +111,7 @@ body {
   background: white;
   border-radius: 15px;
   z-index: 1;
+  word-break: break-all;
 }
 
 h1 {
@@ -123,14 +124,22 @@ button {
 }
 
 .tweet-button {
+  display: block;
   text-decoration: none;
   color: white;
-  background-color: rgb(120, 201, 233);
+  background-color: rgb(98, 198, 238);
   border: 1px solid gray;
   border-radius: 6px;
-  padding: 3px 12px;
+  padding: 3px 9px;
   font-weight: bold;
   font-size: 15px;
+  margin-top: 18px;
+  width: 75px;
+  text-align: center;
+}
+
+.tweet-button:hover {
+  opacity: 0.6;
 }
 
 .year,
