@@ -15,8 +15,9 @@
       <Loading />
     </div>
     <a
+      v-if="loaded"
       class="tweet-button"
-      :href="`http://twitter.com/share?url=https://hakushu-price.herokuapp.com/&text=白州${year}年
+      :href="`http://twitter.com/share?url=https://hakushu-price.herokuapp.com/&text=白州${getYear()}年
 %0a${calc()}円
 %0a`"
       target="_blank"
@@ -56,6 +57,12 @@ export default Vue.extend({
   methods: {
     calc(): number {
       return (this.priceInt / 18) * this.year
+    },
+    getYear(): number {
+      if (Math.abs(this.year)) {
+        return this.year as number
+      }
+      return 0
     },
   },
 })
