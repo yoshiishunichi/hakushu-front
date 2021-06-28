@@ -17,7 +17,7 @@
     <a
       v-if="existPrice && priceInt"
       class="tweet-button"
-      :href="`http://twitter.com/share?url=https://hakushu-price.herokuapp.com/&text=白州${getYear()}年
+      :href="`http://twitter.com/share?url=https://hakusyu-price.herokuapp.com/&text=白州${getYear()}年
 %0a${calc()}円
 %0a`"
       target="_blank"
