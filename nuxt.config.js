@@ -14,7 +14,8 @@ export default {
       {
         hid: 'description',
         name: 'description',
-        content: '白州の値段を捏造するサイトです。',
+        content:
+          '白州の値段を捏造するサイトです。このwebアプリは、現在の白州18年の値段(おそらく最安値)を自動で取得しその価格を18で割った価格を1年分の値段として白州の値段を捏造します。もちろん白州18年の最安値を確認することもできます。',
       },
       { hid: 'og:type', property: 'og:type', content: 'website' },
       {

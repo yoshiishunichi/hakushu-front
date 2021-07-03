@@ -64,4 +64,10 @@ p {
     transform: scale(1);
   }
 }
+
+@media screen and (max-width: 600px) {
+  p {
+    font-size: 15px;
+  }
+}
 </style>
